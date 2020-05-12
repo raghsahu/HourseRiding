@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="colorPrimary">#00643f</color>-->
+<!--    <color name="colorPrimaryDark">#00643f</color> -->
+    <color name="colorPrimary">#983635</color>
+    <color name="colorPrimaryDark">#983635</color>
+    <color name="colorAccent">#000000</color>
+
+    <color name="bg_color">#80496076</color>
+    <color name="light_white">#DFDDDD</color>
+    <color name="light_white1">#f1f1f1</color>
+    <color name="transparent">#83DFDDDD</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="ivory">#FFFFF0</color>
+    <color name="black">#000000</color>
+    <color name="light_black">#757575</color>
+    <color name="blue">#0166ff</color>
+    <color name="twitter_color">#00acee</color>
+    <color name="fb_color">#3b5998</color>
+    <color name="instagram_color">#3f729b</color>
+
+    <color name="colorBtn">#d1a734</color>
+    <color name="colorText">#222222</color>
+
+    <color name="app_theme">@android:color/transparent</color>
+    <color name="yellow">#fff952</color>
+    <color name="yelow">#FCE903</color>
+    <color name="green">#008000</color>
+    <color name="light_green">#7DF57D</color>
+    <color name="brown">#8B4513</color>
+
+    <color name="grey">#778899</color>
+    <color name="light_grey">#C1CDCD</color>
+    <color name="dark_grey">#373737</color>
+    <color name="crimsom">#d40000</color>
+    <!--    <color name="red">#FF1919</color>-->
+    <color name="red">#993733</color>
+
+    <color name="Burgubndy">#800020</color>
+    <color name="Indigo">#4B0082 </color>
+    <color name="Purple">#800080</color>
+    <color name="Violet">#7F00FF</color>
+    <color name="jade">#00A86B</color>
+    <color name="eron">#00FF3F</color>
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.drawerlayout.widget.DrawerLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+<!--        <RelativeLayout-->
+<!--            android:background="@color/bg_color"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            >-->
+<!--        </RelativeLayout>-->
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/app_bar_activity_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer"
+            android:layout_width="@dimen/nav_header_height"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:orientation="vertical"
+            >
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:background="@color/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.riding.hourseriding.utils.ImageViewCircular
+                        android:id="@+id/iv_profile"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/activity_margin_medium"
+                        android:src="@drawable/news_logo" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/text_margin_small"
+                        android:textSize="@dimen/text_size_extra_normal"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/activity_margin_medium"
+                        android:background="@color/white" />
+
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/rv_menu"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/_5sdp"-->
+<!--                        android:nestedScrollingEnabled="false" />-->
+
+                    <ExpandableListView
+                        android:id="@+id/navList"
+                        android:layout_width="@dimen/_260sdp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left|start"
+                        android:background="@color/white"
+                        android:divider="@color/light_white"
+                        android:dividerHeight="@dimen/_1sdp"
+                        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
+
+
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

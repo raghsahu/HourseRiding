@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="newsAdapter"
+            type="com.riding.hourseriding.adapter.News_Adapter" />
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.NewsDetailsActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar">
+
+    </include>
+
+    <androidx.core.widget.NestedScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/rl_card"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:src="@drawable/news1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="center"
+                        />
+
+                    <ImageView
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_share_"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:scaleType="center"
+                        />
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:textAlignment="textStart"
+                    android:text="Heartbroken owners’ quest for answers after mysterious deaths of three horses in 36 hours"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/text_12_light_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="08 May, 2020 15:00"
+                    android:textAlignment="textStart"
+                    android:textStyle="normal">
+                </TextView>
+
+                <TextView
+                    android:layout_margin="@dimen/_5sdp"
+                    android:id="@+id/tv_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Our stability fibres help to stabilise your riding surface and offer an enhanced root structure when blended with sand. Leisure Fibre is post-consumer carpet/ mattress that has been individually selected and passed through a filtration system ensuring that you are left with a quality product. Another major benefit is that our synthetic stability fibres will not degrade, this ensures that your riding surface will withstand the test of time. Leisure Fibre provides a cushioning effect that aids for a smoother ride and more importantly reduces the likelihood of your horse becoming lame."
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_gravity="center"
+                    android:textAlignment="textStart"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    tools:ignore="RtlCompat" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_16_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Related News"
+                    android:textAlignment="center"
+                    android:textStyle="bold">
+
+                </TextView>
+
+                <!--                <View-->
+                <!--                    android:background="@color/light_white"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="@dimen/_1sdp">-->
+                <!--                </View>-->
+
+            </LinearLayout>
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:adapter="@{newsAdapter}"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scrollbars="none"-->
+<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                >-->
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <androidx.viewpager.widget.ViewPager
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@color/transparent"
+                    android:layout_gravity="center"
+                    android:id="@+id/slider_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_230sdp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/iv_left_arrow"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_keyboard_arrow"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp">
+
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/iv_right_arrow"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_keyboard_arrow_right_"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp"
+                >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>
+
+</layout>

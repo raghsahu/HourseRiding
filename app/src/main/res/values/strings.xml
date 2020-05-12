@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">News</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="logout_text">Are you sure to logout from app?</string>
+    <string name="exit_text">Are you sure to exit from app?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="home">Home</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="video_gallery">Videos</string>
+    <string name="discover">Discover</string>
+    <string name="gallery">Gallery</string>
+    <string name="news">News</string>
+    <string name="search_event">Search</string>
+</resources>

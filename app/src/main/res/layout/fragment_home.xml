@@ -4,6 +4,10 @@
     <variable
         name="newsAdapter"
         type="com.riding.hourseriding.adapter.News_Adapter" />
+        <variable
+            name="latestnewsAdapter"
+            type="com.riding.hourseriding.adapter.LatestNews_Adapter" />
+
     <variable
         name="newsDiscoverAdapter"
         type="com.riding.hourseriding.adapter.Discover_Adapter" />
@@ -164,7 +168,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:adapter="@{newsAdapter}"
+                android:adapter="@{latestnewsAdapter}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"

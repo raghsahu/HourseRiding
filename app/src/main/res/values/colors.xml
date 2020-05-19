@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <!--    <color name="colorPrimary">#00643f</color>-->
-<!--    <color name="colorPrimaryDark">#00643f</color> -->
-    <color name="colorPrimary">#983635</color>
-    <color name="colorPrimaryDark">#983635</color>
+<!--    <color name="colorPrimaryDark">#00643f</color>-->
+<!--    <color name="colorPrimary">#983635</color>-->
+<!--    <color name="colorPrimaryDark">#983635</color>-->
+    <color name="colorPrimary">#d1a734</color>
+    <color name="colorPrimaryDark">#d1a734</color>
     <color name="colorAccent">#000000</color>
 
     <color name="bg_color">#80496076</color>

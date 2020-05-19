@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     // load image
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     //dimension
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -60,4 +60,16 @@ dependencies {
     //slider
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
+    //networking
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.android.volley:volley:1.1.1'
+    //rxjava networking
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    //parsing gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

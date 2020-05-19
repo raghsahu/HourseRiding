@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="08 May, 2020 15:00"
-            android:padding="@dimen/_5sdp"
+            android:padding="@dimen/_2sdp"
             android:textAlignment="center"
             android:textStyle="normal">
 

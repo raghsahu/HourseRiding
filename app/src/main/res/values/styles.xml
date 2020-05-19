@@ -24,4 +24,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+
+    <style name="MyGravity" parent="android:Theme.Material.Dialog" />
+
 </resources>

@@ -23,6 +23,9 @@ public interface Api_Call {
     Observable<List<NewsPostModel>> GetLatestPostNews();
 
 
+
+
+
 //    @FormUrlEncoded
 //    @POST("index.php?route=restapi/customer/edit_account")
 //    Observable<SimpleResultModel> UpdateUser(

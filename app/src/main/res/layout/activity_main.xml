@@ -24,6 +24,7 @@
             android:orientation="vertical">
 
             <include
+                android:id="@+id/app_bar"
                 layout="@layout/app_bar_activity_navigation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -44,11 +45,21 @@
                 android:fillViewport="true"
                 android:scrollbars="none">
 
+                <androidx.cardview.widget.CardView
+                    android:background="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:elevation="@dimen/_8sdp"
+                    app:cardElevation="@dimen/_8sdp"
+                    >
+
+
                 <LinearLayout
                     android:background="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
 
                     <com.riding.hourseriding.utils.ImageViewCircular
                         android:id="@+id/iv_profile"
@@ -93,9 +104,10 @@
                         android:dividerHeight="@dimen/_1sdp"
                         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
 
-
-
                 </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
             </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>

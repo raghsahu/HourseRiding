@@ -42,8 +42,12 @@ import com.riding.hourseriding.model.SliderModel;
 import com.riding.hourseriding.model.news_post_model.NewsPostModel;
 import com.riding.hourseriding.utils.Connectivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -58,6 +62,7 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
     SliderAdapter sliderAdapter;
     private int dotsCount;
     private ImageView[] dotes;
+    List<NewsPostModel>newsPostModels=new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -158,6 +163,35 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                             LatestNews_Adapter newsAdapter = new LatestNews_Adapter(response, getActivity());
                             binding.setLatestnewsAdapter(newsAdapter);//set databinding adapter
                             newsAdapter.notifyDataSetChanged();
+
+                            //set item in today news
+                            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+                            Date date = null;
+                            for (int i=0; i<response.size(); i++){
+                                try {
+                                    date = inputFormat.parse(response.get(i).getDate());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                String formattedDate = outputFormat.format(date);
+                                System.out.println(formattedDate); // prints 10-04-2018
+
+                                String current_date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                if (formattedDate.equalsIgnoreCase(current_date)){
+                                    newsPostModels.add(new NewsPostModel(response.get(i)));
+                                }
+
+                            }
+                            Log.e("today_data", "" + newsPostModels.size());
+                            if (newsPostModels!=null && newsPostModels.size()>0){
+                                LatestNews_Adapter todaynewsAdapter = new LatestNews_Adapter(newsPostModels, getActivity());
+                                binding.setTodaynewsAdapter(todaynewsAdapter);//set databinding adapter
+                                todaynewsAdapter.notifyDataSetChanged();
+                            }else {
+                                binding.tvViewAllTop.setVisibility(View.GONE);
+                                binding.tvTodayEmpty.setVisibility(View.VISIBLE);
+                            }
 
                         } catch (Exception e) {
                             progressDialog.dismiss();

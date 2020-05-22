@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -52,56 +54,40 @@
 
                 </TextView>
 
-                <SearchView
-                    android:layout_toEndOf="@+id/tv_main_header"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
-                    android:layout_centerVertical="true"
-                    android:layoutDirection="rtl"
-                    style="@style/edit_text_search"
-                    android:backgroundTint="@color/white"
-                    app:queryHint="@string/search_event"
-                    android:queryHint="@string/search_event"
-                    app:defaultQueryHint="@string/search_event"
-                    android:autofillHints="@string/search_event"
-                    app:iconifiedByDefault="false"
-                    app:searchIcon="@drawable/ic_search_black_24dp"
-                    android:iconifiedByDefault="true"
-                    android:searchIcon="@drawable/ic_search_black_24dp"
-                    android:searchHintIcon="@drawable/ic_search_black_24dp"
-                    android:focusable="false"
-                    />
+<!--                <SearchView-->
+<!--                    android:layout_toEndOf="@+id/tv_main_header"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layoutDirection="rtl"-->
+<!--                    style="@style/edit_text_search"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    app:queryHint="@string/search_event"-->
+<!--                    android:queryHint="@string/search_event"-->
+<!--                    app:defaultQueryHint="@string/search_event"-->
+<!--                    android:autofillHints="@string/search_event"-->
+<!--                    app:iconifiedByDefault="false"-->
+<!--                    app:searchIcon="@drawable/ic_search_black_24dp"-->
+<!--                    android:iconifiedByDefault="true"-->
+<!--                    android:searchIcon="@drawable/ic_search_black_24dp"-->
+<!--                    android:searchHintIcon="@drawable/ic_search_black_24dp"-->
+<!--                    android:focusable="false"-->
+<!--                    />-->
+
+
+
             </LinearLayout>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/iv_logo"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginEnd="@dimen/_10sdp"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_width="@dimen/_24sdp"-->
-<!--                android:layout_height="@dimen/_24sdp"-->
-<!--                app:srcCompat="@drawable/ic_search_black_24dp" />-->
-
-            <SearchView
-                android:layout_toEndOf="@+id/ll_search"
-                android:layout_alignParentEnd="true"
+            <ImageView
+               android:id="@+id/search_bar"
                 android:layout_gravity="center"
                 android:layout_centerVertical="true"
-                android:id="@+id/search_hint"
-                style="@style/edit_text_search"
-                android:backgroundTint="@color/white"
-                app:queryHint="@string/search_event"
-                android:queryHint="@string/search_event"
-                app:defaultQueryHint="@string/search_event"
-                android:autofillHints="@string/search_event"
-                app:iconifiedByDefault="false"
-                app:searchIcon="@drawable/ic_search_black_24dp"
-                android:iconifiedByDefault="false"
-                android:searchIcon="@drawable/ic_search_black_24dp"
-                android:searchHintIcon="@drawable/ic_search_black_24dp"
-                android:focusable="false"
-                />
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                app:srcCompat="@drawable/ic_search_black_24dp" />
+
 
 
         </RelativeLayout>
@@ -113,6 +99,9 @@
         layout="@layout/content_activity_navigation" />
 
 </LinearLayout>
+
+
+</layout>
 
 
 

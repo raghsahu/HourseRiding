@@ -1,9 +1,11 @@
 package com.riding.hourseriding.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,16 +27,12 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.riding.hourseriding.BR;
 import com.riding.hourseriding.R;
-import com.riding.hourseriding.activity.LatestNewsDetailsActivity;
-import com.riding.hourseriding.activity.NewsDetailsActivity;
 import com.riding.hourseriding.databinding.LatestNewsListBinding;
-import com.riding.hourseriding.databinding.NewsListBinding;
-import com.riding.hourseriding.model.SampleModel;
+import com.riding.hourseriding.fragment.NewsDetailsFragment;
 import com.riding.hourseriding.model.news_post_model.NewsPostModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +65,7 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
         holder.itemRowBinding.setModel(dataModel);
         // holder.itemRowBinding.setItemClickListener(this);
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM, yyyy HH:mm");
         Date date = null;
         try {
             date = inputFormat.parse(dataModel.getDate());
@@ -110,9 +112,20 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
             @Override
             public void onClick(View v) {
                 String postID=dataModel.getId().toString();
-                Intent intent=new Intent(context, LatestNewsDetailsActivity.class);
-                intent.putExtra("id", ""+postID);
-                context.startActivity(intent);
+//                Intent intent=new Intent(context, LatestNewsDetailsActivity.class);
+//                intent.putExtra("id", ""+postID);
+//                context.startActivity(intent);
+
+                NewsDetailsFragment fragment2 = new NewsDetailsFragment();
+                Bundle bundle = new Bundle();
+               // bundle.putSerializable("MyAddressEdit", dataModel);
+                bundle.putString("id",postID);
+                FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fragment2.setArguments(bundle);
 
             }
         });

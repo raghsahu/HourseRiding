@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class NewsPostModel {
 
+    private final com.riding.hourseriding.model.news_post_model.NewsPostModel NewsPostModel;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -77,6 +78,10 @@ public class NewsPostModel {
     @SerializedName("better_featured_image")
     @Expose
     private BetterFeaturedImage betterFeaturedImage;
+
+    public NewsPostModel(NewsPostModel newsPostModel) {
+        this.NewsPostModel=newsPostModel;
+    }
 //    @SerializedName("_links")
 //    @Expose
 //    private Links links;

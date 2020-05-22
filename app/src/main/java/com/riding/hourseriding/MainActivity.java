@@ -32,6 +32,7 @@ import com.riding.hourseriding.databinding.ActivityMainBinding;
 import com.riding.hourseriding.fragment.Discover_Fragment;
 import com.riding.hourseriding.fragment.Gallery_Fragment;
 import com.riding.hourseriding.fragment.Home_Fragment;
+import com.riding.hourseriding.fragment.Search_Fragment;
 import com.riding.hourseriding.model.CategoryChild;
 import com.riding.hourseriding.model.DrawerItem;
 
@@ -115,6 +116,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addDrawerItems();
         setupDrawer();
 
+        binding.appBar.searchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment_create = new Search_Fragment();
+                FragmentTransaction ft_create = getSupportFragmentManager().beginTransaction();
+                ft_create.replace(R.id.frame, fragment_create);
+                ft_create.addToBackStack(null);
+                ft_create.commit();
+            }
+        });
 
 
     }

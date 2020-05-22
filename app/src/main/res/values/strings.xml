@@ -16,4 +16,6 @@
     <string name="gallery">Gallery</string>
     <string name="news">News</string>
     <string name="search_event">Search</string>
+    <string name="news_details">News Details</string>
+    <string name="search">Search</string>
 </resources>

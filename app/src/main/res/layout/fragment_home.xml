@@ -8,7 +8,11 @@
             name="latestnewsAdapter"
             type="com.riding.hourseriding.adapter.LatestNews_Adapter" />
 
-    <variable
+        <variable
+            name="todaynewsAdapter"
+            type="com.riding.hourseriding.adapter.LatestNews_Adapter" />
+
+        <variable
         name="newsDiscoverAdapter"
         type="com.riding.hourseriding.adapter.Discover_Adapter" />
     </data>
@@ -120,13 +124,25 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:focusable="false"
-                android:adapter="@{newsAdapter}"
+                android:adapter="@{todaynewsAdapter}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 >
             </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_today_empty"
+                style="@style/text_14_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Today’s Top Stories not avail"
+                android:textAlignment="center"
+                >
+
+            </TextView>
 
             <TextView
                 android:id="@+id/tv_view_all_top"

@@ -24,7 +24,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
                     android:textAlignment="textStart"
-                    android:text="news"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/text_12_light_black"
-                    android:text="May 11, 2020"
+                    android:text=""
                     />
 
                 <LinearLayout
@@ -56,6 +56,7 @@
                     android:layout_height="wrap_content"
                     >
                     <ImageView
+                        android:id="@+id/iv_share"
                         android:layout_margin="@dimen/_5sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_baseline_share"

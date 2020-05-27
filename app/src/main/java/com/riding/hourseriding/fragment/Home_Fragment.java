@@ -17,6 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -75,11 +78,12 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
         } catch (Exception e) {
         }
 
-
-        setSlider();
-        getTopNews();
+        //setSlider();
+       // getTopNews();
         if (Connectivity.isConnected(getActivity())){
+            GetTodayNews();
             GetLatestNews();
+            GetHighlightNews();
         }else {
             Toast.makeText(getActivity(), "Please check Internet", Toast.LENGTH_SHORT).show();
         }
@@ -87,27 +91,48 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
         binding.tvViewAllTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), AllNewsActivity.class);
-                intent.putExtra("NewsHeading","Top News");
-                startActivity(intent);
+                ViewAllNewsFragment fragment2 = new ViewAllNewsFragment();
+                Bundle bundle = new Bundle();
+                // bundle.putSerializable("MyAddressEdit", dataModel);
+                bundle.putString("NewsHeading","Top News");
+                FragmentManager manager = ((FragmentActivity)getActivity()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fragment2.setArguments(bundle);
             }
         });
 
         binding.tvHighlightNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), AllNewsActivity.class);
-                intent.putExtra("NewsHeading","Highlight");
-                startActivity(intent);
+                ViewAllNewsFragment fragment2 = new ViewAllNewsFragment();
+                Bundle bundle = new Bundle();
+                // bundle.putSerializable("MyAddressEdit", dataModel);
+                bundle.putString("NewsHeading","Highlight");
+                FragmentManager manager = ((FragmentActivity)getActivity()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fragment2.setArguments(bundle);
             }
         });
 
         binding.tvLatesstNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), AllNewsActivity.class);
-                intent.putExtra("NewsHeading","Latest News");
-                startActivity(intent);
+                ViewAllNewsFragment fragment2 = new ViewAllNewsFragment();
+                Bundle bundle = new Bundle();
+                // bundle.putSerializable("MyAddressEdit", dataModel);
+                bundle.putString("NewsHeading","Latest News");
+                FragmentManager manager = ((FragmentActivity)getActivity()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fragment2.setArguments(bundle);
             }
         });
 
@@ -142,6 +167,90 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     @SuppressLint("CheckResult")
+    private void GetHighlightNews() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.MyGravity);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        progressDialog.show();
+
+        Api_Call apiInterface = RxApiClient.getClient(Base_Url.BaseUrl).create(Api_Call.class);
+
+        //category fix 37= latest news
+        apiInterface.GetLatestPostNews("1","52")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<List<NewsPostModel>>() {
+                    @Override
+                    public void onNext(List<NewsPostModel> response) {
+                        //Handle logic
+                        try {
+                            progressDialog.dismiss();
+                            Log.e("latest_news", "" + response.get(0).getTitle().getRendered());
+
+                            if (response!=null && response.size()>0){
+
+                                Discover_Adapter discAdapter = new Discover_Adapter(response, getActivity());
+                                binding.setNewsDiscoverAdapter(discAdapter);//set databinding adapter
+                                discAdapter.notifyDataSetChanged();
+
+                                if (response.size()>3){
+                                    binding.tvHighlightNews.setVisibility(View.VISIBLE);
+                                }else {
+                                    binding.tvHighlightNews.setVisibility(View.GONE);
+                                }
+
+                            }else {
+                                    binding.tvHighlightNews.setVisibility(View.GONE);
+
+                            }
+
+                        } catch (Exception e) {
+                            Log.e("hightlight_catch", e.toString());
+                            binding.tvHighlightNews.setVisibility(View.GONE);
+                            binding.tvHighlightEmpty.setVisibility(View.VISIBLE);
+
+                            progressDialog.dismiss();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //Handle error
+                        progressDialog.dismiss();
+                        Log.e("hightlight_error", e.toString());
+
+                        if (e instanceof HttpException) {
+                            int code = ((HttpException) e).code();
+                            switch (code) {
+                                case 403:
+                                    break;
+                                case 404:
+                                    //Toast.makeText(EmailSignupActivity.this, R.string.email_already_use, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 409:
+                                    break;
+                                default:
+                                    // Toast.makeText(EmailSignupActivity.this, R.string.network_failure, Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                        } else {
+                            if (TextUtils.isEmpty(e.getMessage())) {
+                                // Toast.makeText(EmailSignupActivity.this, R.string.network_failure, Toast.LENGTH_SHORT).show();
+                            } else {
+                                //Toast.makeText(EmailSignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        progressDialog.dismiss();
+                    }
+                });
+
+    }
+
+    @SuppressLint("CheckResult")
     private void GetLatestNews() {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.MyGravity);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -149,7 +258,89 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         Api_Call apiInterface = RxApiClient.getClient(Base_Url.BaseUrl).create(Api_Call.class);
 
-        apiInterface.GetLatestPostNews()
+        //category fix 37= latest news
+        apiInterface.GetLatestPostNews("1","37")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<List<NewsPostModel>>() {
+                    @Override
+                    public void onNext(List<NewsPostModel> response) {
+                        //Handle logic
+                        try {
+                            progressDialog.dismiss();
+                            Log.e("latest_news", "" + response.get(0).getTitle().getRendered());
+
+                            if (response!=null && response.size()>0){
+                                LatestNews_Adapter newsAdapter = new LatestNews_Adapter(response, getActivity());
+                                binding.setLatestnewsAdapter(newsAdapter);//set databinding adapter
+                                newsAdapter.notifyDataSetChanged();
+
+                                if (response.size()>3){
+                                    binding.tvLatesstNews.setVisibility(View.VISIBLE);
+                                }else {
+                                    binding.tvLatesstNews.setVisibility(View.GONE);
+                                }
+
+                            }else {
+                                    binding.tvLatesstNews.setVisibility(View.GONE);
+                               // binding.tvTodayEmpty.setVisibility(View.VISIBLE);
+                            }
+
+
+
+
+                        } catch (Exception e) {
+                            progressDialog.dismiss();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //Handle error
+                        progressDialog.dismiss();
+                        Log.e("mr_product_error", e.toString());
+
+                        if (e instanceof HttpException) {
+                            int code = ((HttpException) e).code();
+                            switch (code) {
+                                case 403:
+                                    break;
+                                case 404:
+                                    //Toast.makeText(EmailSignupActivity.this, R.string.email_already_use, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 409:
+                                    break;
+                                default:
+                                    // Toast.makeText(EmailSignupActivity.this, R.string.network_failure, Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                        } else {
+                            if (TextUtils.isEmpty(e.getMessage())) {
+                                // Toast.makeText(EmailSignupActivity.this, R.string.network_failure, Toast.LENGTH_SHORT).show();
+                            } else {
+                                //Toast.makeText(EmailSignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        progressDialog.dismiss();
+                    }
+                });
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void GetTodayNews() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.MyGravity);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        progressDialog.show();
+
+        Api_Call apiInterface = RxApiClient.getClient(Base_Url.BaseUrl).create(Api_Call.class);
+
+        apiInterface.GetTodayNews()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<NewsPostModel>>() {
@@ -159,10 +350,26 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                         try {
                             progressDialog.dismiss();
                            Log.e("result_news", "" + response.get(0).getTitle().getRendered());
+                            ArrayList<SliderModel> listarray = new ArrayList<>();
+                            for (int i=0; i<response.size(); i++){
+                                if (response.get(i).getBetterFeaturedImage()!=null){
+                                   // sliderPostModels.add(new NewsPostModel(response.get(i)));
+                                    listarray.add(new SliderModel(response.get(i).getTitle().getRendered(),
+                                            response.get(i).getBetterFeaturedImage().getSourceUrl(),
+                                            response.get(i).getDate()));
+                                }
+                            }
+                            if (listarray!=null && listarray.size()>0){
+                                sliderAdapter = new SliderAdapter(getActivity(),listarray);
+                                binding.sliderPager.setAdapter(sliderAdapter);
+                                binding.sliderPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+                                binding.sliderPager.setCurrentItem(0);
+                                binding.sliderPager.addOnPageChangeListener(pageChangeListener);
+                                dotesIndicater();
+                            }
 
-                            LatestNews_Adapter newsAdapter = new LatestNews_Adapter(response, getActivity());
-                            binding.setLatestnewsAdapter(newsAdapter);//set databinding adapter
-                            newsAdapter.notifyDataSetChanged();
+
+                           //*************************************************************************
 
                             //set item in today news
                             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -189,7 +396,12 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                 binding.setTodaynewsAdapter(todaynewsAdapter);//set databinding adapter
                                 todaynewsAdapter.notifyDataSetChanged();
                             }else {
-                                binding.tvViewAllTop.setVisibility(View.GONE);
+                                if (newsPostModels.size()>3){
+                                    binding.tvViewAllTop.setVisibility(View.VISIBLE);
+                                }else {
+                                    binding.tvViewAllTop.setVisibility(View.GONE);
+                                }
+
                                 binding.tvTodayEmpty.setVisibility(View.VISIBLE);
                             }
 
@@ -254,22 +466,6 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     }
 
-    private void getTopNews() {
-
-        ArrayList<SampleModel> sampleModels = new ArrayList<>();
-        sampleModels.add(new SampleModel("Badminton’s backstage heroes: The people who make the horse trials happen", "08 may", R.drawable.news1));
-        sampleModels.add(new SampleModel("Public urged not to let off fireworks during weekly ‘clap for carers’", "100", R.drawable.news2));
-        sampleModels.add(new SampleModel("National dressage championships cancelled, but sport may resume from July", "50", R.drawable.news3));
-
-        News_Adapter newsAdapter = new News_Adapter(sampleModels, getActivity());
-        binding.setNewsAdapter(newsAdapter);//set databinding adapter
-        newsAdapter.notifyDataSetChanged();
-
-        Discover_Adapter discAdapter = new Discover_Adapter(sampleModels, getActivity());
-        binding.setNewsDiscoverAdapter(discAdapter);//set databinding adapter
-        discAdapter.notifyDataSetChanged();
-
-    }
     ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

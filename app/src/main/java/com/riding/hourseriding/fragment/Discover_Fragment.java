@@ -15,11 +15,14 @@ import com.riding.hourseriding.MainActivity;
 import com.riding.hourseriding.R;
 import com.riding.hourseriding.adapter.Discover_Adapter;
 import com.riding.hourseriding.adapter.News_Adapter;
+import com.riding.hourseriding.adapter.News_Adapter1;
 import com.riding.hourseriding.databinding.FragmentDiscoverBinding;
 import com.riding.hourseriding.databinding.FragmentHomeBinding;
 import com.riding.hourseriding.model.SampleModel;
+import com.riding.hourseriding.model.news_post_model.NewsPostModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Raghvendra Sahu on 11-May-20.
@@ -62,11 +65,11 @@ public class Discover_Fragment extends Fragment implements SwipeRefreshLayout.On
     private void getTopNews() {
 
         ArrayList<SampleModel> sampleModels = new ArrayList<>();
-        sampleModels.add(new SampleModel("Badminton’s backstage heroes: The people who make the horse trials happen", "08 may", R.drawable.news1));
-        sampleModels.add(new SampleModel("Public urged not to let off fireworks during weekly ‘clap for carers’", "100", R.drawable.news2));
-        sampleModels.add(new SampleModel("National dressage championships cancelled, but sport may resume from July", "50", R.drawable.news3));
+        sampleModels.add(new SampleModel("Badminton’s backstage heroes: The people who make the horse trials happen", "2020-05-12T11:24:52", R.drawable.news1));
+        sampleModels.add(new SampleModel("Public urged not to let off fireworks during weekly ‘clap for carers’", "2020-05-12T11:24:52", R.drawable.news2));
+        sampleModels.add(new SampleModel("National dressage championships cancelled, but sport may resume from July", "2020-05-12T11:24:52",R.drawable.news3));
 
-        Discover_Adapter newsAdapter = new Discover_Adapter(sampleModels, getActivity());
+        News_Adapter1 newsAdapter = new News_Adapter1(sampleModels, getActivity());
         binding.setNewsAdapter(newsAdapter);//set databinding adapter
         newsAdapter.notifyDataSetChanged();
 

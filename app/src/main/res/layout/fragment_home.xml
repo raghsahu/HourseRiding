@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-    <variable
-        name="newsAdapter"
-        type="com.riding.hourseriding.adapter.News_Adapter" />
         <variable
             name="latestnewsAdapter"
             type="com.riding.hourseriding.adapter.LatestNews_Adapter" />
@@ -141,7 +138,6 @@
                 android:text="Today’s Top Stories not avail"
                 android:textAlignment="center"
                 >
-
             </TextView>
 
             <TextView
@@ -239,6 +235,18 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 >
             </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_highlight_empty"
+                style="@style/text_14_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Highlight news not avail"
+                android:textAlignment="center"
+                >
+
+            </TextView>
 
             <TextView
                 android:id="@+id/tv_highlight_news"

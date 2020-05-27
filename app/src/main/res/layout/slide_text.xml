@@ -22,6 +22,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:singleLine="true"
             android:id="@+id/tv_test"
             style="@style/textview14white"
             android:layout_width="match_parent"
@@ -34,6 +35,7 @@
         </TextView>
 
         <TextView
+            android:id="@+id/tv_date"
             android:textColor="#Fcfcfc"
             style="@style/textview12white"
             android:layout_width="match_parent"

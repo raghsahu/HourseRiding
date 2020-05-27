@@ -86,16 +86,16 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
         ArrayList<SliderModel> listarray = new ArrayList<>();
 
-        listarray.add(new SliderModel("Pretty registered Welsh part-bred mare",R.drawable.news1));
-        listarray.add(new SliderModel("Loving, kind & sane",R.drawable.news2));
-        listarray.add(new SliderModel("Pretty 14hh cob mare",R.drawable.news3));
+        sampleModels.add(new SampleModel("Badminton’s backstage heroes: The people who make the horse trials happen", "2020-05-12T11:24:52", R.drawable.news1));
+        sampleModels.add(new SampleModel("Public urged not to let off fireworks during weekly ‘clap for carers’", "2020-05-12T11:24:52", R.drawable.news2));
+        sampleModels.add(new SampleModel("National dressage championships cancelled, but sport may resume from July", "2020-05-12T11:24:52",R.drawable.news3));
 
         sliderAdapter = new SliderAdapter(NewsDetailsActivity.this,listarray);
         binding.sliderPager.setAdapter(sliderAdapter);
         binding.sliderPager.setPageTransformer(true, new ZoomOutSlideTransformer());
         binding.sliderPager.setCurrentItem(0);
         binding.sliderPager.addOnPageChangeListener(pageChangeListener);
-        dotesIndicater();
+       // dotesIndicater();
 
     }
 

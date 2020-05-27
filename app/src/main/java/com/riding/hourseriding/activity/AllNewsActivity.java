@@ -3,16 +3,31 @@ package com.riding.hourseriding.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.riding.hourseriding.R;
+import com.riding.hourseriding.adapter.LatestNews_Adapter;
 import com.riding.hourseriding.adapter.News_Adapter;
+import com.riding.hourseriding.api_call.Api_Call;
+import com.riding.hourseriding.api_call.Base_Url;
+import com.riding.hourseriding.api_call.RxApiClient;
 import com.riding.hourseriding.databinding.ActivityAllNewsBinding;
 import com.riding.hourseriding.databinding.ActivityNewsDetailsBinding;
 import com.riding.hourseriding.model.SampleModel;
+import com.riding.hourseriding.model.news_post_model.NewsPostModel;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.adapter.rxjava2.HttpException;
 
 public class AllNewsActivity extends AppCompatActivity {
     ActivityAllNewsBinding binding;
@@ -37,9 +52,15 @@ public class AllNewsActivity extends AppCompatActivity {
             }
         });
 
-        getTopNews();
+        if (NewsHeading.equalsIgnoreCase("Latest News")){
+            //getLatestAllNews();
+        }else {
+            getTopNews();
+        }
+
 
     }
+
 
     private void getTopNews() {
 

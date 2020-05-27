@@ -41,7 +41,6 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
     private List<NewsPostModel> dataModelList;
     Context context;
 
-
     public LatestNews_Adapter(List<NewsPostModel> dataModelList, Context ctx) {
         this.dataModelList = dataModelList;
         context = ctx;

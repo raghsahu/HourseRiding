@@ -20,10 +20,12 @@ import retrofit2.http.Query;
 public interface Api_Call {
 
     @GET("wp-json/wp/v2/posts?per_page=5")
-    Observable<List<NewsPostModel>> GetLatestPostNews();
+    Observable<List<NewsPostModel>> GetTodayNews();
 
-
-
+    @GET("wp-json/wp/v2/posts?per_page=5")
+    Observable<List<NewsPostModel>> GetLatestPostNews(
+            @Query("page") String page,
+            @Query("categories") String categ);
 
 
 //    @FormUrlEncoded

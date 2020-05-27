@@ -2,6 +2,7 @@ package com.riding.hourseriding.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -43,12 +44,15 @@ import com.riding.hourseriding.utils.Connectivity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class NewsDetailsFragment extends Fragment {
     FragmentNewsDetailsBinding binding;
-    TextView title;
+    TextView title,tv_time;
     WebView content;
     private String Newsid;
     ProgressDialog progressDialog;
@@ -56,6 +60,7 @@ public class NewsDetailsFragment extends Fragment {
     Map<String, Object> mapPost;
     Map<String, Object> mapTitle;
     Map<String, Object> mapContent;
+    private String news_url;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +68,7 @@ public class NewsDetailsFragment extends Fragment {
         View root = binding.getRoot();
         content=binding.webviewContent;
         title=binding.title;
+        tv_time=binding.tvTime;
 
         try {
             ((MainActivity) getActivity()).Update_header(getString(R.string.news_details));
@@ -86,7 +92,7 @@ public class NewsDetailsFragment extends Fragment {
            Newsid = getArguments().getString("id");
            // final String img_url = getIntent().getStringExtra("featured_media");
             //getIntent().getExtras().getString("id");
-            String url = "https://www.equipro.org.uk/wp-json/wp/v2/posts/"+Newsid+"?fields=title,content";
+            String url = "https://www.equipro.org.uk/wp-json/wp/v2/posts/"+Newsid+"?fields=title,content,date,link";
 
             Log.e("url_detail",""+url);
 
@@ -101,6 +107,19 @@ public class NewsDetailsFragment extends Fragment {
         }catch (Exception e){
 
         }
+        //***************************************
+        binding.ivShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent share = new Intent(android.content.Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                share.putExtra(Intent.EXTRA_SUBJECT, "News");
+                share.putExtra(Intent.EXTRA_TEXT, news_url);
+                startActivity(Intent.createChooser(share, "Share link!"));
+
+            }
+        });
 //*****************************************
         WebSettings webSettings = content.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -195,7 +214,21 @@ public class NewsDetailsFragment extends Fragment {
                 mapTitle = (Map<String, Object>) mapPost.get("title");
                 mapContent = (Map<String, Object>) mapPost.get("content");
 
-                title.setText(mapTitle.get("rendered").toString());
+                String news_date=mapPost.get("date").toString();
+                news_url=mapPost.get("link").toString();
+
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM, yyyy HH:mm");
+                Date date = null;
+                try {
+                    date = inputFormat.parse(news_date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String formattedDate = outputFormat.format(date);
+                System.out.println(formattedDate); // prints 10-04-2018
+                tv_time.setText(formattedDate);
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     title.setText(Html.fromHtml(mapTitle.get("rendered").toString()));
                 } else {

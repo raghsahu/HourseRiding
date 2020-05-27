@@ -15,7 +15,10 @@ import com.bumptech.glide.Glide;
 import com.riding.hourseriding.R;
 import com.riding.hourseriding.model.SliderModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -58,16 +61,29 @@ public class SliderAdapter extends PagerAdapter {
 
         ImageView imageView = view.findViewById(R.id.circle_imag);
         TextView tv_test = view.findViewById(R.id.tv_test);
+        TextView tv_time = view.findViewById(R.id.tv_date);
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM, yyyy HH:mm");
+        Date date = null;
+        try {
+            date = inputFormat.parse(listarray.get(position).getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedDate = outputFormat.format(date);
+        System.out.println(formattedDate); // prints 10-04-2018
+
+        tv_time.setText(formattedDate);
 
         tv_test.setText(listarray.get(position).getName());
         //imageView.setImageResource(sliderImage[position]);
         Glide
                 .with(context)
-                .load(listarray.get(position).getImage())
+                .load(listarray.get(position).getUrl())
                 .centerCrop()
                 // .placeholder(R.drawable.loading_spinner)
                 .into(imageView);
-
 
         container.addView(view);
         return view;

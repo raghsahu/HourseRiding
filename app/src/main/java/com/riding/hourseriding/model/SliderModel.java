@@ -7,6 +7,7 @@ public class SliderModel {
     String name;
     String url;
     int image;
+    String Date;
 
     public SliderModel(String name, int image) {
         this.name = name;
@@ -17,6 +18,20 @@ public class SliderModel {
         this.name = name;
         this.image = image;
         this.url = url;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public SliderModel(String rendered, String sourceUrl, String date) {
+        this.name = rendered;
+        this.url = sourceUrl;
+        this.Date = date;
     }
 
     public String getName() {

@@ -37,7 +37,7 @@ public class Discover_Fragment extends Fragment implements SwipeRefreshLayout.On
         View root = binding.getRoot();
 
         try {
-            ((MainActivity) getActivity()).Update_header(getString(R.string.discover));
+            ((MainActivity) getActivity()).Update_header("New Rider");
             ((MainActivity) getActivity()).CheckBottom(2);
         } catch (Exception e) {
         }

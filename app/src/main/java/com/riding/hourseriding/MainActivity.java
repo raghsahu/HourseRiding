@@ -52,12 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     String[] items;
 
-    private ExpandableListView mExpandableListView;
-    private ExpandableListAdapter mExpandableListAdapter;
-    List<String> mExpandableListTitle;
-    private NavigationManager mNavigationManager;
-    // Map<String, List<String>> mExpandableListData;
-    Map<String, List<CategoryChild>> mExpandableListData;
+   // private ExpandableListView mExpandableListView;
+//    private ExpandableListAdapter mExpandableListAdapter;
+//    List<String> mExpandableListTitle;
+//    private NavigationManager mNavigationManager;
+//    // Map<String, List<String>> mExpandableListData;
+//    Map<String, List<CategoryChild>> mExpandableListData;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -109,9 +109,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navView.getMenu().findItem(R.id.navigation_home).setChecked(true);
         setHomeFragment();
 
-        mExpandableListView = (ExpandableListView) findViewById(R.id.navList);
-        mNavigationManager = FragmentNavigationManager.obtain(this);
-            getNewsCategory();
+//        mExpandableListView = (ExpandableListView) findViewById(R.id.navList);
+//        mNavigationManager = FragmentNavigationManager.obtain(this);
+
+      //  getNewsCategory();
 
         addDrawerItems();
         setupDrawer();
@@ -130,97 +131,101 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void getNewsCategory() {
-        mExpandableListTitle = new ArrayList<String>();
-        mExpandableListData = new HashMap<String, List<CategoryChild>>();
-
-        mExpandableListTitle.add("All News");
-      //  mExpandableListTitle.add("Industry News");
-        mExpandableListTitle.add("Popular News");
-       // mExpandableListTitle.add("Sports News");
-       // mExpandableListTitle.add("Events News");
-        mExpandableListTitle.add("Equestrian News");
-
-        List<CategoryChild> colors = new ArrayList<CategoryChild>();
-        colors.add(new CategoryChild("Gallery"));
-        colors.add(new CategoryChild("Events"));
-        colors.add(new CategoryChild("Discover"));
-        colors.add(new CategoryChild("Market"));
-
-        mExpandableListData.put(mExpandableListTitle.get(0), colors);
-        mExpandableListData.put(mExpandableListTitle.get(1), colors);
-        mExpandableListData.put(mExpandableListTitle.get(2), colors);
-      //  mExpandableListData.put(mExpandableListTitle.get(3), colors);
-       // mExpandableListData.put(mExpandableListTitle.get(4), colors);
-      //  mExpandableListData.put(mExpandableListTitle.get(5), colors);
-
-        mExpandableListAdapter = new CustomExpandableListAdapter(MainActivity.this, mExpandableListTitle, mExpandableListData);
-        mExpandableListView.setAdapter(mExpandableListAdapter);
-    }
+//    private void getNewsCategory() {
+//        mExpandableListTitle = new ArrayList<String>();
+//        mExpandableListData = new HashMap<String, List<CategoryChild>>();
+//
+//        mExpandableListTitle.add("All News");
+//      //  mExpandableListTitle.add("Industry News");
+//        mExpandableListTitle.add("Popular News");
+//       // mExpandableListTitle.add("Sports News");
+//       // mExpandableListTitle.add("Events News");
+//        mExpandableListTitle.add("Equestrian News");
+//
+//        List<CategoryChild> colors = new ArrayList<CategoryChild>();
+//        colors.add(new CategoryChild("Gallery"));
+//        colors.add(new CategoryChild("Events"));
+//        colors.add(new CategoryChild("Discover"));
+//        colors.add(new CategoryChild("Market"));
+//
+//        mExpandableListData.put(mExpandableListTitle.get(0), colors);
+//        mExpandableListData.put(mExpandableListTitle.get(1), colors);
+//        mExpandableListData.put(mExpandableListTitle.get(2), colors);
+//      //  mExpandableListData.put(mExpandableListTitle.get(3), colors);
+//       // mExpandableListData.put(mExpandableListTitle.get(4), colors);
+//      //  mExpandableListData.put(mExpandableListTitle.get(5), colors);
+//
+//        mExpandableListAdapter = new CustomExpandableListAdapter(MainActivity.this, mExpandableListTitle, mExpandableListData);
+//        mExpandableListView.setAdapter(mExpandableListAdapter);
+//    }
 
     private void addDrawerItems() {
 
-//        ArrayList<DrawerItem>drawerItemList=new ArrayList<>();
-//        drawerItemList.add(new DrawerItem("All News", R.drawable.news_logo));
-//        drawerItemList.add(new DrawerItem("Industry News", R.drawable.news_logo));
-//        drawerItemList.add(new DrawerItem("Related News", R.drawable.news_logo));
-//        drawerItemList.add(new DrawerItem("Popular News", R.drawable.news_logo));
-//        drawerItemList.add(new DrawerItem("Sports News", R.drawable.news_logo));
-//        drawerItemList.add(new DrawerItem("Events News", R.drawable.news_logo));
-//        drawerItemList.add(new DrawerItem("Equestrian News", R.drawable.news_logo));
+        ArrayList<DrawerItem>drawerItemList=new ArrayList<>();
+        drawerItemList.add(new DrawerItem("Horse Care", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Vet Library", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Feeding Horses", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Training Tips", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("New Riders & Owners", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Horse Breeding", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Buying & Selling Advice", R.drawable.news_logo));
+
+        drawerItemList.add(new DrawerItem("Expert Opinion", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Have Your Say", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Industry News", R.drawable.news_logo));
+
+        DrawerAdapter drawerAdapter=new DrawerAdapter(this,drawerItemList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        binding.rvMenu.setLayoutManager(layoutManager);
+        binding.rvMenu.setAdapter(drawerAdapter);
+      // mDrawerLayout.closeDrawer(GravityCompat.START);
 //
-//        DrawerAdapter drawerAdapter=new DrawerAdapter(this,drawerItemList);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        binding.rvMenu.setLayoutManager(layoutManager);
-//        binding.rvMenu.setAdapter(drawerAdapter);
-
-
-        mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-//                getSupportActionBar().setTitle(mExpandableListTitle.get(groupPosition).toString());
-            }
-        });
-
-        mExpandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                //getSupportActionBar().setTitle(R.string.film_genres);
-            }
-        });
-
-        mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                String selectedItem = ((List) (mExpandableListData.get(mExpandableListTitle.get(groupPosition))))
-                        .get(childPosition).toString();
-
+//        mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+//            @Override
+//            public void onGroupExpand(int groupPosition) {
+////                getSupportActionBar().setTitle(mExpandableListTitle.get(groupPosition).toString());
+//            }
+//        });
+//
+//        mExpandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+//            @Override
+//            public void onGroupCollapse(int groupPosition) {
+//                //getSupportActionBar().setTitle(R.string.film_genres);
+//            }
+//        });
+//
+//        mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+//            @Override
+//            public boolean onChildClick(ExpandableListView parent, View v,
+//                                        int groupPosition, int childPosition, long id) {
+//                String selectedItem = ((List) (mExpandableListData.get(mExpandableListTitle.get(groupPosition))))
+//                        .get(childPosition).toString();
+//
+////                String selectedID =  mExpandableListData.get(mExpandableListTitle.get(groupPosition))
+////                        .get(childPosition).getCategory_id();
+//
 //                String selectedID =  mExpandableListData.get(mExpandableListTitle.get(groupPosition))
-//                        .get(childPosition).getCategory_id();
-
-                String selectedID =  mExpandableListData.get(mExpandableListTitle.get(groupPosition))
-                        .get(childPosition).getName();
-
-                mNavigationManager.showFragmentAction(selectedID);
-//                if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
-//                     mNavigationManager.showFragmentAction(selectedItem);
-//                } else if (items[1].equals(mExpandableListTitle.get(groupPosition))) {
-//                    //  mNavigationManager.showFragmentComedy(selectedItem);
-//                } else if (items[2].equals(mExpandableListTitle.get(groupPosition))) {
-//                    // mNavigationManager.showFragmentDrama(selectedItem);
-//                } else if (items[3].equals(mExpandableListTitle.get(groupPosition))) {
-//                    //  mNavigationManager.showFragmentMusical(selectedItem);
-//                } else if (items[4].equals(mExpandableListTitle.get(groupPosition))) {
-//                    //mNavigationManager.showFragmentThriller(selectedItem);
-//                } else {
-//                    throw new IllegalArgumentException("Not supported fragment type");
-//                }
-
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-                return false;
-            }
-        });
+//                        .get(childPosition).getName();
+//
+//                mNavigationManager.showFragmentAction(selectedID);
+////                if (items[0].equals(mExpandableListTitle.get(groupPosition))) {
+////                     mNavigationManager.showFragmentAction(selectedItem);
+////                } else if (items[1].equals(mExpandableListTitle.get(groupPosition))) {
+////                    //  mNavigationManager.showFragmentComedy(selectedItem);
+////                } else if (items[2].equals(mExpandableListTitle.get(groupPosition))) {
+////                    // mNavigationManager.showFragmentDrama(selectedItem);
+////                } else if (items[3].equals(mExpandableListTitle.get(groupPosition))) {
+////                    //  mNavigationManager.showFragmentMusical(selectedItem);
+////                } else if (items[4].equals(mExpandableListTitle.get(groupPosition))) {
+////                    //mNavigationManager.showFragmentThriller(selectedItem);
+////                } else {
+////                    throw new IllegalArgumentException("Not supported fragment type");
+////                }
+//
+//                mDrawerLayout.closeDrawer(GravityCompat.START);
+//                return false;
+//            }
+//        });
 
 
     }
@@ -281,6 +286,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void CheckBottom(int pos) {
         navView.getMenu().getItem(pos).setChecked(true);
+    }
+
+    public void CloseDrawer() {
+        mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override

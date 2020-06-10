@@ -35,7 +35,7 @@
             android:id="@+id/iv_search"
             android:layout_weight="0.85"
             android:layout_gravity="center"
-            android:src="@drawable/ic_search_black_24dp"
+            android:src="@drawable/search_icon_primary"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp">
 

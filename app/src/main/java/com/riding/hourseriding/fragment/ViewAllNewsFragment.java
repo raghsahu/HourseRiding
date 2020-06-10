@@ -60,6 +60,7 @@ public class ViewAllNewsFragment extends Fragment {
 
         try {
             ((MainActivity) getActivity()).Update_header(NewsHeading);
+            ((MainActivity) getActivity()).CloseDrawer();
         } catch (Exception e) {
         }
         //onback press call
@@ -178,6 +179,8 @@ public class ViewAllNewsFragment extends Fragment {
                             }else {
                             }
 
+                            binding.nextPrevButton.setVisibility(View.VISIBLE);
+
                         } catch (Exception e) {
                             progressDialog.dismiss();
                         }
@@ -249,6 +252,8 @@ public class ViewAllNewsFragment extends Fragment {
                             newsAdapter = new LatestNews_Adapter(response, getActivity());
                             binding.setNewsAdapter(newsAdapter);//set databinding adapter
                             newsAdapter.notifyDataSetChanged();
+
+                            binding.nextPrevButton.setVisibility(View.VISIBLE);
 
                         } catch (Exception e) {
                             progressDialog.dismiss();

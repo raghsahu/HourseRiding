@@ -28,6 +28,13 @@ public interface Api_Call {
             @Query("categories") String categ);
 
 
+    @GET("wp-json/wp/v2/posts?per_page=5")
+    Observable<List<NewsPostModel>>  EditorPic(
+            @Query("page") String page,
+            @Query("categories") String categ);
+
+
+
 //    @FormUrlEncoded
 //    @POST("index.php?route=restapi/customer/edit_account")
 //    Observable<SimpleResultModel> UpdateUser(

@@ -35,11 +35,6 @@ public class SliderAdapter extends PagerAdapter {
         this.listarray = listarray1;
     }
 
-//    public int[] sliderImage = {
-//            R.drawable.mic_icon,
-//            R.drawable.mymik,
-//            R.drawable.mic_icon
-//    };
 
     @Override
     public int getCount() {

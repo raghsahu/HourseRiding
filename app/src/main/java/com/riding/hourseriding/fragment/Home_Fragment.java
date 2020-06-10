@@ -30,7 +30,6 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.riding.hourseriding.MainActivity;
 import com.riding.hourseriding.R;
-import com.riding.hourseriding.activity.AllNewsActivity;
 import com.riding.hourseriding.activity.NewsDetailsActivity;
 import com.riding.hourseriding.adapter.Discover_Adapter;
 import com.riding.hourseriding.adapter.LatestNews_Adapter;
@@ -84,6 +83,7 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
             GetTodayNews();
             GetLatestNews();
             GetHighlightNews();
+            GetEditorsPic();
         }else {
             Toast.makeText(getActivity(), "Please check Internet", Toast.LENGTH_SHORT).show();
         }
@@ -161,9 +161,108 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
             }
         });
 
+        //******************editor pic slider arrow
+        binding.ivLeftEditor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tab = binding.sliderEditor.getCurrentItem();
+                if (tab > 0) {
+                    tab--;
+                    binding.sliderEditor.setCurrentItem(tab);
+                } else if (tab == 0) {
+                    binding.sliderEditor.setCurrentItem(tab);
+                }
+            }
+        });
 
+        binding.ivRightEditor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tab = binding.sliderEditor.getCurrentItem();
+                tab++;
+                binding.sliderEditor.setCurrentItem(tab);
+            }
+        });
 
         return root;
+    }
+
+    @SuppressLint("CheckResult")
+    private void GetEditorsPic() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.MyGravity);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        progressDialog.show();
+
+        Api_Call apiInterface = RxApiClient.getClient(Base_Url.BaseUrl).create(Api_Call.class);
+
+        apiInterface.EditorPic("1","53")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<List<NewsPostModel>>() {
+                    @Override
+                    public void onNext(List<NewsPostModel> response) {
+                        //Handle logic
+                        try {
+                            progressDialog.dismiss();
+                            Log.e("result_news", "" + response.get(0).getTitle().getRendered());
+                            ArrayList<SliderModel> listarray = new ArrayList<>();
+                            for (int i=0; i<response.size(); i++){
+                                if (response.get(i).getBetterFeaturedImage()!=null){
+                                    // sliderPostModels.add(new NewsPostModel(response.get(i)));
+                                    listarray.add(new SliderModel(response.get(i).getTitle().getRendered(),
+                                            response.get(i).getBetterFeaturedImage().getSourceUrl(),
+                                            response.get(i).getDate()));
+                                }
+                            }
+                            if (listarray.size() > 0){
+                                SliderAdapter sliderAdapter = new SliderAdapter(getActivity(),listarray);
+                                binding.sliderEditor.setAdapter(sliderAdapter);
+                                binding.sliderEditor.setPageTransformer(true, new ZoomOutSlideTransformer());
+                                binding.sliderEditor.setCurrentItem(0);
+                                binding.sliderEditor.addOnPageChangeListener(pageChangeListenerEditor);
+                            }
+
+                        } catch (Exception e) {
+                            progressDialog.dismiss();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //Handle error
+                        progressDialog.dismiss();
+                        Log.e("mr_product_error", e.toString());
+
+                        if (e instanceof HttpException) {
+                            int code = ((HttpException) e).code();
+                            switch (code) {
+                                case 403:
+                                    break;
+                                case 404:
+                                    //Toast.makeText(EmailSignupActivity.this, R.string.email_already_use, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 409:
+                                    break;
+                                default:
+                                    // Toast.makeText(EmailSignupActivity.this, R.string.network_failure, Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                        } else {
+                            if (TextUtils.isEmpty(e.getMessage())) {
+                                // Toast.makeText(EmailSignupActivity.this, R.string.network_failure, Toast.LENGTH_SHORT).show();
+                            } else {
+                                //Toast.makeText(EmailSignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        progressDialog.dismiss();
+                    }
+                });
+
     }
 
     @SuppressLint("CheckResult")
@@ -488,6 +587,26 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         }
     };
+
+    ViewPager.OnPageChangeListener pageChangeListenerEditor = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+
 
     @SuppressLint("ClickableViewAccessibility")
     public void dotesIndicater() {

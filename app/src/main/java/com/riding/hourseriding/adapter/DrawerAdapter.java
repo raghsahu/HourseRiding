@@ -3,16 +3,21 @@ package com.riding.hourseriding.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.riding.hourseriding.R;
 import com.riding.hourseriding.activity.AllNewsActivity;
+import com.riding.hourseriding.fragment.ViewAllNewsFragment;
 import com.riding.hourseriding.model.DrawerItem;
 
 import java.util.ArrayList;
@@ -63,9 +68,16 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItem
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(mContext, AllNewsActivity.class);
-                intent.putExtra("NewsHeading",currentItem.getTitle());
-                mContext.startActivity(intent);
+                ViewAllNewsFragment fragment2 = new ViewAllNewsFragment();
+                Bundle bundle = new Bundle();
+                // bundle.putSerializable("MyAddressEdit", dataModel);
+                bundle.putString("NewsHeading",currentItem.getTitle());
+                FragmentManager manager = ((FragmentActivity)mContext).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fragment2.setArguments(bundle);
             }
         });
 

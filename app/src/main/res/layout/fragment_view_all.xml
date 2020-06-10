@@ -33,6 +33,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_below="@+id/recycler_news"
         android:layout_margin="@dimen/_10sdp"
         android:id="@+id/next_prev_button"

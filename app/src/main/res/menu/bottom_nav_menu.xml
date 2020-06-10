@@ -11,12 +11,12 @@
     <item
         android:id="@+id/navigation_video"
         android:icon="@drawable/ic_video_library"
-        android:title="@string/video_gallery" />
+        android:title="Tips" />
 
     <item
         android:id="@+id/navigation_discover"
         android:icon="@drawable/ic_library_books"
-        android:title="@string/discover" />
+        android:title="New Rider" />
 
 
 

@@ -8,8 +8,8 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:padding="@dimen/_8sdp"
         android:id="@+id/relative_item"
-        android:padding="@dimen/_7sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -18,25 +18,25 @@
     <ImageView
         app:itemIconTint="@color/white"
         android:id="@+id/menu_item_icon"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:src="@drawable/nnn" />
 
     <TextView
         android:layout_toEndOf="@+id/menu_item_icon"
         android:id="@+id/menu_item_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_24sdp"
+        android:layout_height="24dp"
         android:paddingStart="@dimen/_5sdp"
-        android:text="news"
+        android:text=" "
         android:gravity="center_vertical"
-        android:textSize="@dimen/_14sdp"
-        android:textColor="@color/white" />
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/black" />
 
     </RelativeLayout>
 
     <View
-        android:background="@color/white"
+        android:background="@color/light_white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp">
 

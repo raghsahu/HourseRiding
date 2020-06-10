@@ -33,7 +33,7 @@ public class Gallery_Fragment  extends Fragment implements SwipeRefreshLayout.On
         View root = binding.getRoot();
 
         try {
-            ((MainActivity) getActivity()).Update_header(getString(R.string.gallery));
+            ((MainActivity) getActivity()).Update_header("Tips");
             ((MainActivity) getActivity()).CheckBottom(1);
         } catch (Exception e) {
         }

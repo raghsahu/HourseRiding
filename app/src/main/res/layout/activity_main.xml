@@ -87,15 +87,8 @@
                         android:layout_marginTop="@dimen/activity_margin_medium"
                         android:background="@color/white" />
 
-<!--                    <androidx.recyclerview.widget.RecyclerView-->
-<!--                        android:id="@+id/rv_menu"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="@dimen/_5sdp"-->
-<!--                        android:nestedScrollingEnabled="false" />-->
-
-                    <ExpandableListView
-                        android:id="@+id/navList"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_menu"
                         android:layout_width="@dimen/_260sdp"
                         android:layout_height="match_parent"
                         android:layout_gravity="left|start"

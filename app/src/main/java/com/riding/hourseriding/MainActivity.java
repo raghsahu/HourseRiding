@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,29 +18,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.riding.hourseriding.adapter.CustomExpandableListAdapter;
 import com.riding.hourseriding.adapter.DrawerAdapter;
 import com.riding.hourseriding.databinding.ActivityMainBinding;
-import com.riding.hourseriding.fragment.Discover_Fragment;
-import com.riding.hourseriding.fragment.Gallery_Fragment;
 import com.riding.hourseriding.fragment.Home_Fragment;
 import com.riding.hourseriding.fragment.Search_Fragment;
-import com.riding.hourseriding.model.CategoryChild;
+import com.riding.hourseriding.fragment.ViewAllNewsFragment;
 import com.riding.hourseriding.model.DrawerItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -72,21 +64,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ft_home.addToBackStack(null);
                     ft_home.commit();
 
+                    CheckBottom(0);
                     return true;
                 case R.id.navigation_video:
-                    Fragment fragment_faq = new Gallery_Fragment();
-                    FragmentTransaction ft_faq = getSupportFragmentManager().beginTransaction();
-                    ft_faq.replace(R.id.frame, fragment_faq);
-                    ft_faq.addToBackStack(null);
-                    ft_faq.commit();
+//                    Fragment fragment_faq = new Gallery_Fragment();
+//                    FragmentTransaction ft_faq = getSupportFragmentManager().beginTransaction();
+//                    ft_faq.replace(R.id.frame, fragment_faq);
+//                    ft_faq.addToBackStack(null);
+//                    ft_faq.commit();
+
+                    ViewAllNewsFragment fragment2 = new ViewAllNewsFragment();
+                    Bundle bundle = new Bundle();
+                    // bundle.putSerializable("MyAddressEdit", dataModel);
+                    bundle.putString("NewsHeading","Tips");
+                    bundle.putString("NewsId","57");
+                    FragmentTransaction fragmentTransaction =  getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame, fragment2);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    fragment2.setArguments(bundle);
+
+                    CheckBottom(1);
 
                     return true;
                 case R.id.navigation_discover:
-                    Fragment fragment_create = new Discover_Fragment();
-                    FragmentTransaction ft_create = getSupportFragmentManager().beginTransaction();
-                    ft_create.replace(R.id.frame, fragment_create);
-                    ft_create.addToBackStack(null);
-                    ft_create.commit();
+//                    Fragment fragment_create = new Discover_Fragment();
+//                    FragmentTransaction ft_create = getSupportFragmentManager().beginTransaction();
+//                    ft_create.replace(R.id.frame, fragment_create);
+//                    ft_create.addToBackStack(null);
+//                    ft_create.commit();
+
+                    Fragment fragment_create = new ViewAllNewsFragment();
+                    Bundle bundle1 = new Bundle();
+                    // bundle.putSerializable("MyAddressEdit", dataModel);
+                    bundle1.putString("NewsHeading","New Rider");
+                    bundle1.putString("NewsId","58");
+                    FragmentTransaction fragmentTransaction1 =  getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction1.replace(R.id.frame, fragment_create);
+                    fragmentTransaction1.addToBackStack(null);
+                    fragmentTransaction1.commit();
+                    fragment_create.setArguments(bundle1);
+
+                    CheckBottom(2);
 
                     return true;
 
@@ -162,17 +181,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void addDrawerItems() {
 
         ArrayList<DrawerItem>drawerItemList=new ArrayList<>();
-        drawerItemList.add(new DrawerItem("Horse Care", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("Vet Library", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("Feeding Horses", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("Training Tips", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("New Riders & Owners", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("Horse Breeding", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("Buying & Selling Advice", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Horse Care", R.drawable.news_logo,"54"));
+        drawerItemList.add(new DrawerItem("Vet Library", R.drawable.news_logo,"55"));
+        drawerItemList.add(new DrawerItem("Feeding Horses", R.drawable.news_logo,"56"));
+        drawerItemList.add(new DrawerItem("Training Tips", R.drawable.news_logo,"57"));
+        drawerItemList.add(new DrawerItem("New Riders & Owners", R.drawable.news_logo,"58"));
+        drawerItemList.add(new DrawerItem("Horse Breeding", R.drawable.news_logo,"59"));
+        drawerItemList.add(new DrawerItem("Buying & Selling Advice", R.drawable.news_logo,"60"));
 
-        drawerItemList.add(new DrawerItem("Expert Opinion", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("Have Your Say", R.drawable.news_logo));
-        drawerItemList.add(new DrawerItem("Industry News", R.drawable.news_logo));
+        drawerItemList.add(new DrawerItem("Expert Opinion", R.drawable.news_logo,"61"));
+        drawerItemList.add(new DrawerItem("Have Your Say", R.drawable.news_logo,"62"));
+        drawerItemList.add(new DrawerItem("Industry News", R.drawable.news_logo,"63"));
 
         DrawerAdapter drawerAdapter=new DrawerAdapter(this,drawerItemList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

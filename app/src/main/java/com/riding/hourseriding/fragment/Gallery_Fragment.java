@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +18,7 @@ import com.riding.hourseriding.adapter.News_Adapter;
 import com.riding.hourseriding.databinding.FragmentGalleryBinding;
 import com.riding.hourseriding.databinding.FragmentHomeBinding;
 import com.riding.hourseriding.model.SampleModel;
+import com.riding.hourseriding.utils.Connectivity;
 
 import java.util.ArrayList;
 
@@ -51,7 +53,12 @@ public class Gallery_Fragment  extends Fragment implements SwipeRefreshLayout.On
             });
         }
 
-        getTopNews();
+
+        if (Connectivity.isConnected(getActivity())){
+            getTopNews();
+        }else {
+            Toast.makeText(getActivity(), "Please check Internet", Toast.LENGTH_SHORT).show();
+        }
 
         return root;
 

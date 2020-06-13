@@ -5,11 +5,13 @@ package com.riding.hourseriding.model;
  */
 public class DrawerItem {
     String title;
+    String NewsId;
     int imgResID;
 
-    public DrawerItem(String title, int image){
+    public DrawerItem(String title, int image,String newsId){
         this.title=title;
         imgResID =image;
+        NewsId =newsId;
     }
 
     public String getTitle() {
@@ -20,4 +22,19 @@ public class DrawerItem {
         return imgResID;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getNewsId() {
+        return NewsId;
+    }
+
+    public void setNewsId(String newsId) {
+        NewsId = newsId;
+    }
+
+    public void setImgResID(int imgResID) {
+        this.imgResID = imgResID;
+    }
 }

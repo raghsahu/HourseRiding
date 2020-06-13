@@ -72,6 +72,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItem
                 Bundle bundle = new Bundle();
                 // bundle.putSerializable("MyAddressEdit", dataModel);
                 bundle.putString("NewsHeading",currentItem.getTitle());
+                bundle.putString("NewsId",currentItem.getNewsId());
                 FragmentManager manager = ((FragmentActivity)mContext).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame, fragment2);

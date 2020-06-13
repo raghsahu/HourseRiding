@@ -43,7 +43,7 @@ import retrofit2.adapter.rxjava2.HttpException;
 
 public class ViewAllNewsFragment extends Fragment {
     FragmentViewAllBinding binding;
-    private String NewsHeading;
+    private String NewsHeading,NewsId;
     LatestNews_Adapter newsAdapter;
     List<NewsPostModel>newsPostModels=new ArrayList<>();
     private Integer Page_nmbr=1;
@@ -56,6 +56,7 @@ public class ViewAllNewsFragment extends Fragment {
 
         if (getArguments()!=null){
             NewsHeading=getArguments().getString("NewsHeading");
+            NewsId=getArguments().getString("NewsId");
         }
 
         try {
@@ -77,17 +78,11 @@ public class ViewAllNewsFragment extends Fragment {
             });
         }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        binding.recyclerNews.setLayoutManager(layoutManager);
-        newsAdapter = new LatestNews_Adapter(newsPostModels, getActivity());
-        binding.recyclerNews.setAdapter(newsAdapter);
 
-        if (NewsHeading.equalsIgnoreCase("Latest News")){
-            getLatestAllNews(String.valueOf(Page_nmbr),"37");
-        }else if (NewsHeading.equalsIgnoreCase("Highlight")){
-            getLatestAllNews(String.valueOf(Page_nmbr),"52");
-        }else if (NewsHeading.equalsIgnoreCase("Top News")){
+        if (NewsHeading.equalsIgnoreCase("Top News")){
             GetTodayNews();
+        }else {
+            getLatestAllNews(String.valueOf(Page_nmbr),NewsId);
         }
 //************************************************************
 
@@ -96,10 +91,10 @@ public class ViewAllNewsFragment extends Fragment {
             public void onClick(View v) {
                         next=true;
                         if (Connectivity.isConnected(getActivity())){
-                            if (NewsHeading.equalsIgnoreCase("Latest News")){
-                                getLatestAllNews(String.valueOf(Page_nmbr),"37");
-                            }else if (NewsHeading.equalsIgnoreCase("Highlight")){
-                                getLatestAllNews(String.valueOf(Page_nmbr),"52");
+                            if (NewsHeading.equalsIgnoreCase("Top News")){
+                                GetTodayNews();
+                            }else {
+                                getLatestAllNews(String.valueOf(Page_nmbr),NewsId);
                             }
                         }else {
                             Toast.makeText(getActivity(), "Please check internet", Toast.LENGTH_SHORT).show();
@@ -114,10 +109,10 @@ public class ViewAllNewsFragment extends Fragment {
                 next=false;
                     if (Page_nmbr>1){
                         if (Connectivity.isConnected(getActivity())){
-                            if (NewsHeading.equalsIgnoreCase("Latest News")){
-                                getLatestAllNews(String.valueOf(Page_nmbr),"37");
-                            }else if (NewsHeading.equalsIgnoreCase("Highlight")){
-                                getLatestAllNews(String.valueOf(Page_nmbr),"52");
+                            if (NewsHeading.equalsIgnoreCase("Top News")){
+                                GetTodayNews();
+                            }else {
+                                getLatestAllNews(String.valueOf(Page_nmbr),NewsId);
                             }
                         }else {
                             Toast.makeText(getActivity(), "Please check internet", Toast.LENGTH_SHORT).show();

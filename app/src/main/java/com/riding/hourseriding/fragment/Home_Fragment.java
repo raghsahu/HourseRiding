@@ -95,6 +95,7 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 Bundle bundle = new Bundle();
                 // bundle.putSerializable("MyAddressEdit", dataModel);
                 bundle.putString("NewsHeading","Top News");
+                bundle.putString("NewsId"," ");
                 FragmentManager manager = ((FragmentActivity)getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame, fragment2);
@@ -111,6 +112,7 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 Bundle bundle = new Bundle();
                 // bundle.putSerializable("MyAddressEdit", dataModel);
                 bundle.putString("NewsHeading","Highlight");
+                bundle.putString("NewsId","52");
                 FragmentManager manager = ((FragmentActivity)getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame, fragment2);
@@ -127,6 +129,7 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 Bundle bundle = new Bundle();
                 // bundle.putSerializable("MyAddressEdit", dataModel);
                 bundle.putString("NewsHeading","Latest News");
+                bundle.putString("NewsId","37");
                 FragmentManager manager = ((FragmentActivity)getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame, fragment2);

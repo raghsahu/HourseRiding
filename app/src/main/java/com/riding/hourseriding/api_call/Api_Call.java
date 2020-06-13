@@ -34,6 +34,10 @@ public interface Api_Call {
             @Query("categories") String categ);
 
 
+    @GET("wp-json/wp/v2/posts?")
+    Observable<List<NewsPostModel>> GetSearchNews(
+            @Query("search") String search_text);
+
 
 //    @FormUrlEncoded
 //    @POST("index.php?route=restapi/customer/edit_account")

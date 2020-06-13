@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <data>
+        <variable
+            name="newsAdapter"
+            type="com.riding.hourseriding.adapter.LatestNews_Adapter" />
+    </data>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -16,7 +20,7 @@
 
         <SearchView
             android:layout_weight="0.15"
-            android:id="@+id/search_hint"
+            android:id="@+id/search_text"
             style="@style/edit_text_search"
             android:backgroundTint="@color/white"
             app:queryHint="@string/search_event"
@@ -43,6 +47,17 @@
 
 
     </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_news"
+        android:adapter="@{newsAdapter}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>

@@ -111,10 +111,6 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
             @Override
             public void onClick(View v) {
                 String postID=dataModel.getId().toString();
-//                Intent intent=new Intent(context, LatestNewsDetailsActivity.class);
-//                intent.putExtra("id", ""+postID);
-//                context.startActivity(intent);
-
                 NewsDetailsFragment fragment2 = new NewsDetailsFragment();
                 Bundle bundle = new Bundle();
                // bundle.putSerializable("MyAddressEdit", dataModel);

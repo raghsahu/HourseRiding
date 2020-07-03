@@ -8,12 +8,11 @@
         android:id="@+id/circle_imag"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_180sdp"
-        android:scaleType="fitXY"
+        android:layout_height="@dimen/_200sdp"
+
         android:src="@drawable/news1"
         >
     </ImageView>
-
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -88,6 +88,7 @@ public class NewsPostModel {
         NewsPostModel = null;
     }
 
+
 //    @SerializedName("_links")
 //    @Expose
 //    private Links links;

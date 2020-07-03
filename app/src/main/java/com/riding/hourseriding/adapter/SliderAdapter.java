@@ -76,7 +76,7 @@ public class SliderAdapter extends PagerAdapter {
         Glide
                 .with(context)
                 .load(listarray.get(position).getUrl())
-                .centerCrop()
+                //.centerCrop()
                 // .placeholder(R.drawable.loading_spinner)
                 .into(imageView);
 

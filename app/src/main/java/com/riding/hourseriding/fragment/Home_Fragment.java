@@ -2,7 +2,6 @@ package com.riding.hourseriding.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,22 +23,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.riding.hourseriding.MainActivity;
 import com.riding.hourseriding.R;
-import com.riding.hourseriding.activity.NewsDetailsActivity;
 import com.riding.hourseriding.adapter.Discover_Adapter;
 import com.riding.hourseriding.adapter.LatestNews_Adapter;
-import com.riding.hourseriding.adapter.News_Adapter;
 import com.riding.hourseriding.adapter.SliderAdapter;
+import com.riding.hourseriding.adapter.TodayNews_Adapter;
 import com.riding.hourseriding.api_call.Api_Call;
 import com.riding.hourseriding.api_call.Base_Url;
 import com.riding.hourseriding.api_call.RxApiClient;
 import com.riding.hourseriding.databinding.FragmentHomeBinding;
-import com.riding.hourseriding.model.SampleModel;
 import com.riding.hourseriding.model.SliderModel;
 import com.riding.hourseriding.model.news_post_model.NewsPostModel;
 import com.riding.hourseriding.utils.Connectivity;
@@ -64,7 +57,8 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
     SliderAdapter sliderAdapter;
     private int dotsCount;
     private ImageView[] dotes;
-    List<NewsPostModel>newsPostModels=new ArrayList<>();
+    //List<TodayNewsModel>todayNewsModels=new ArrayList<>();
+   List<NewsPostModel>newsPostModels=new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -95,7 +89,7 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 Bundle bundle = new Bundle();
                 // bundle.putSerializable("MyAddressEdit", dataModel);
                 bundle.putString("NewsHeading","Top News");
-                bundle.putString("NewsId"," ");
+                bundle.putString("NewsId","");
                 FragmentManager manager = ((FragmentActivity)getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame, fragment2);
@@ -373,7 +367,7 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                             Log.e("latest_news", "" + response.get(0).getTitle().getRendered());
 
                             if (response!=null && response.size()>0){
-                                LatestNews_Adapter newsAdapter = new LatestNews_Adapter(response, getActivity());
+                                LatestNews_Adapter newsAdapter = new LatestNews_Adapter(response, getActivity(), "");
                                 binding.setLatestnewsAdapter(newsAdapter);//set databinding adapter
                                 newsAdapter.notifyDataSetChanged();
 
@@ -470,7 +464,6 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                 dotesIndicater();
                             }
 
-
                            //*************************************************************************
 
                             //set item in today news
@@ -490,25 +483,33 @@ public class Home_Fragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                 if (formattedDate.equalsIgnoreCase(current_date)){
                                     newsPostModels.add(new NewsPostModel(response.get(i)));
                                 }
-
                             }
-                            Log.e("today_data", "" + newsPostModels.size());
-                            if (newsPostModels!=null && newsPostModels.size()>0){
-                                LatestNews_Adapter todaynewsAdapter = new LatestNews_Adapter(newsPostModels, getActivity());
+                           Log.e("today_data1", "" + newsPostModels.size());
+                            if (response.size() > 0){
+                                TodayNews_Adapter todaynewsAdapter = new TodayNews_Adapter(response, getActivity());
                                 binding.setTodaynewsAdapter(todaynewsAdapter);//set databinding adapter
                                 todaynewsAdapter.notifyDataSetChanged();
-                            }else {
+
                                 if (newsPostModels.size()>3){
                                     binding.tvViewAllTop.setVisibility(View.VISIBLE);
                                 }else {
                                     binding.tvViewAllTop.setVisibility(View.GONE);
                                 }
 
+                                if (newsPostModels.size()==0){
+                                    binding.tvTodayEmpty.setVisibility(View.VISIBLE);
+                                }else {
+                                    binding.tvTodayEmpty.setVisibility(View.GONE);
+                                }
+
+
+                            }else {
                                 binding.tvTodayEmpty.setVisibility(View.VISIBLE);
                             }
 
                         } catch (Exception e) {
                             progressDialog.dismiss();
+                            Log.e("res_catch", e.toString());
                         }
 
                     }

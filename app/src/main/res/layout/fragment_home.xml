@@ -7,7 +7,7 @@
 
         <variable
             name="todaynewsAdapter"
-            type="com.riding.hourseriding.adapter.LatestNews_Adapter" />
+            type="com.riding.hourseriding.adapter.TodayNews_Adapter" />
 
         <variable
         name="newsDiscoverAdapter"
@@ -55,7 +55,7 @@
                     android:layout_gravity="center"
                     android:id="@+id/slider_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_230sdp"
+                    android:layout_height="@dimen/_250sdp"
                     android:visibility="visible" />
 
                 <ImageView
@@ -295,7 +295,7 @@
                     android:layout_gravity="center"
                     android:id="@+id/slider_editor"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_230sdp"
+                    android:layout_height="@dimen/_250sdp"
                     android:visibility="visible" />
 
                 <ImageView

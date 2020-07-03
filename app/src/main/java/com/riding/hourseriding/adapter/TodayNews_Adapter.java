@@ -24,7 +24,9 @@ import com.bumptech.glide.request.target.Target;
 import com.riding.hourseriding.BR;
 import com.riding.hourseriding.R;
 import com.riding.hourseriding.databinding.LatestNewsListBinding;
+import com.riding.hourseriding.databinding.TodayNewsListBinding;
 import com.riding.hourseriding.fragment.NewsDetailsFragment;
+import com.riding.hourseriding.model.TodayNewsModel;
 import com.riding.hourseriding.model.news_post_model.NewsPostModel;
 
 import java.text.ParseException;
@@ -33,24 +35,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.ViewHolder> {
+public class TodayNews_Adapter extends RecyclerView.Adapter<TodayNews_Adapter.ViewHolder> {
 
     private List<NewsPostModel> dataModelList;
     Context context;
-    String Today;
 
-    public LatestNews_Adapter(List<NewsPostModel> dataModelList, Context ctx, String today) {
+    public TodayNews_Adapter(List<NewsPostModel> dataModelList, Context ctx) {
         this.dataModelList = dataModelList;
         context = ctx;
-        Today = today;
 
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LatestNewsListBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.latest_news_list, parent, false);
+        TodayNewsListBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.today_news_list, parent, false);
 
         return new ViewHolder(binding);
 
@@ -60,7 +60,7 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         final NewsPostModel dataModel = dataModelList.get(position);
         holder.bind(dataModel);
-        holder.itemRowBinding.setModel(dataModel);
+       // holder.itemRowBinding.setModel(dataModel);
         // holder.itemRowBinding.setItemClickListener(this);
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM, yyyy HH:mm");
@@ -76,48 +76,9 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
         System.out.println(formattedDate);
 
         String current_date = new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault()).format(new Date());
-
-        if (Today!=null && Today.equalsIgnoreCase("Today")){
-            if (today_formatDate.equalsIgnoreCase(current_date)){
-                holder.itemRowBinding.tvTime.setText(formattedDate);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    holder.itemRowBinding.tvTitle.setText(Html.fromHtml(dataModel.getExcerpt().getRendered(), Html.FROM_HTML_MODE_COMPACT));
-                } else {
-                    holder.itemRowBinding.tvTitle.setText(Html.fromHtml(dataModel.getExcerpt().getRendered()));
-                }
-
-                try {
-                    // Log.e("img_size",""+dataModel.getBetterFeaturedImage());
-                    if (dataModel.getBetterFeaturedImage()!=null) {
-                        Glide.with(context)
-                                .load(dataModel.getBetterFeaturedImage().getSourceUrl())
-                                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                                .error(R.drawable.news_logo)
-                                .listener(new RequestListener<Drawable>() {
-                                    @Override
-                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                        return false;
-                                    }
-                                }).into(holder.itemRowBinding.newsImg);
-
-
-                    }
-
-                }catch (Exception e){
-
-                }
-
-            }else {
-                holder.itemRowBinding.cardNews.setVisibility(View.GONE);
-            }
-
-        }else {
+        if (today_formatDate.equalsIgnoreCase(current_date)){
             holder.itemRowBinding.tvTime.setText(formattedDate);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 holder.itemRowBinding.tvTitle.setText(Html.fromHtml(dataModel.getExcerpt().getRendered(), Html.FROM_HTML_MODE_COMPACT));
             } else {
@@ -126,7 +87,7 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
 
             try {
                 // Log.e("img_size",""+dataModel.getBetterFeaturedImage());
-                if (dataModel.getBetterFeaturedImage()!=null) {
+                if (dataModel.getBetterFeaturedImage().getSourceUrl()!=null) {
                     Glide.with(context)
                             .load(dataModel.getBetterFeaturedImage().getSourceUrl())
                             .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
@@ -142,14 +103,16 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
                                     return false;
                                 }
                             }).into(holder.itemRowBinding.newsImg);
-
-
                 }
 
             }catch (Exception e){
 
             }
+        }else {
+            holder.itemRowBinding.cardNews.setVisibility(View.GONE);
         }
+
+        //***************************
 
 
 
@@ -159,7 +122,7 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
                 String postID=dataModel.getId().toString();
                 NewsDetailsFragment fragment2 = new NewsDetailsFragment();
                 Bundle bundle = new Bundle();
-               // bundle.putSerializable("MyAddressEdit", dataModel);
+                // bundle.putSerializable("MyAddressEdit", dataModel);
                 bundle.putString("id",postID);
                 FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = manager.beginTransaction();
@@ -178,9 +141,9 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public LatestNewsListBinding itemRowBinding;
+        public TodayNewsListBinding itemRowBinding;
 
-        public ViewHolder(LatestNewsListBinding itemRowBinding) {
+        public ViewHolder(TodayNewsListBinding itemRowBinding) {
             super(itemRowBinding.getRoot());
             this.itemRowBinding = itemRowBinding;
         }
@@ -190,4 +153,6 @@ public class LatestNews_Adapter extends RecyclerView.Adapter<LatestNews_Adapter.
             itemRowBinding.executePendingBindings();
         }
     }
+
+
 }

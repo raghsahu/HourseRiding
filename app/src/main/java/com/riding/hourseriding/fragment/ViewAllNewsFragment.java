@@ -21,6 +21,7 @@ import com.riding.hourseriding.MainActivity;
 import com.riding.hourseriding.R;
 import com.riding.hourseriding.adapter.LatestNews_Adapter;
 import com.riding.hourseriding.adapter.SliderAdapter;
+import com.riding.hourseriding.adapter.TodayNews_Adapter;
 import com.riding.hourseriding.api_call.Api_Call;
 import com.riding.hourseriding.api_call.Base_Url;
 import com.riding.hourseriding.api_call.RxApiClient;
@@ -164,17 +165,18 @@ public class ViewAllNewsFragment extends Fragment {
                                 if (formattedDate.equalsIgnoreCase(current_date)){
                                     newsPostModels.add(new NewsPostModel(response.get(i)));
                                 }
-
                             }
                             Log.e("today_data", "" + newsPostModels.size());
-                            if (newsPostModels!=null && newsPostModels.size()>0){
-                                LatestNews_Adapter todaynewsAdapter = new LatestNews_Adapter(newsPostModels, getActivity());
+                            //Log.e("today_data1", "" + newsPostModels.get(0).getDate());
+                           // if (newsPostModels!=null && newsPostModels.size()>0){
+                                LatestNews_Adapter todaynewsAdapter = new LatestNews_Adapter(response, getActivity(),"Today");
                                 binding.setNewsAdapter(todaynewsAdapter);//set databinding adapter
                                 todaynewsAdapter.notifyDataSetChanged();
-                            }else {
-                            }
 
-                            binding.nextPrevButton.setVisibility(View.VISIBLE);
+                         //   }else {
+                          //  }
+
+                            binding.nextPrevButton.setVisibility(View.GONE);
 
                         } catch (Exception e) {
                             progressDialog.dismiss();
@@ -244,7 +246,7 @@ public class ViewAllNewsFragment extends Fragment {
                             }else {
                                 Page_nmbr--;
                             }
-                            newsAdapter = new LatestNews_Adapter(response, getActivity());
+                            newsAdapter = new LatestNews_Adapter(response, getActivity(),"");
                             binding.setNewsAdapter(newsAdapter);//set databinding adapter
                             newsAdapter.notifyDataSetChanged();
 

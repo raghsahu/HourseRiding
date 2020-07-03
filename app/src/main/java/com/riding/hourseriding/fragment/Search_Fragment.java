@@ -100,7 +100,7 @@ public class Search_Fragment extends Fragment {
                           //  Log.e("latest_news", "" + response.get(0).getTitle().getRendered());
 
                             if (response!=null && !response.isEmpty()){
-                                LatestNews_Adapter newsAdapter = new LatestNews_Adapter(response, getActivity());
+                                LatestNews_Adapter newsAdapter = new LatestNews_Adapter(response, getActivity(), "");
                                 binding.setNewsAdapter(newsAdapter);//set databinding adapter
                                 newsAdapter.notifyDataSetChanged();
                             }else {
